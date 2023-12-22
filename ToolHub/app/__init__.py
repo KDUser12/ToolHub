@@ -9,7 +9,8 @@ from core.developer_mode import DeveloperMode
 class ToolHub:
     system = platform.system()
 
-    def __init__(self):
+    def __init__(self, version):
+        self.version = version
         self.run_developer_mode()
 
     def run_developer_mode(self):
@@ -25,7 +26,7 @@ class ToolHub:
                 if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                     sys.stdin.readline()
                     self.clear_all()
-                    DeveloperMode()
+                    DeveloperMode(self.version, self.system)
                     break
             except select.error:
                 pass
