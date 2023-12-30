@@ -6,18 +6,18 @@ import select
 from core.developer_mode import DeveloperMode
 
 
-class ToolHub:
-    system = platform.system()
+class ToolHubApp:
+    operating_system = platform.system()
 
-    def __init__(self, version):
-        self.version = version
+    def __init__(self, app_version):
+        self.app_version = app_version
         self.run_developer_mode()
 
     def run_developer_mode(self):
-        self.clear_all()
+        self.clear_screen()
 
-        for i in range(5, 0, -1):
-            sys.stdout.write(f"Press enter to enter developer mode. ({i})")
+        for countdown in reversed(range(1, 6)):
+            sys.stdout.write(f"Press enter to enter developer mode. ({countdown})")
             sys.stdout.flush()
             time.sleep(1)
             sys.stdout.write('\r')
@@ -25,18 +25,14 @@ class ToolHub:
             try:
                 if sys.stdin in select.select([sys.stdin], [], [], 0)[0]:
                     sys.stdin.readline()
-                    self.clear_all()
-                    DeveloperMode(self.version, self.system)
+                    self.clear_screen()
+                    DeveloperMode(self.app_version, self.operating_system)
                     break
             except select.error:
                 pass
+
         sys.stdout.write('\033[K')
         sys.stdout.flush()
-        return None
 
-    def clear_all(self):
-        if self.system == 'Windows':
-            os.system('cls' if os.name == 'nt' else 'clear')
-        else:
-            os.system('clear')
-        return None
+    def clear_screen(self):
+        os.system('cls' if self.operating_system == 'Windows' else 'clear')

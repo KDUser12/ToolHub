@@ -5,7 +5,7 @@ from core.developer_mode.managements import CommandManagements
 
 class DeveloperMode:
     current_time = datetime.now()
-    special_time = {
+    formatted_time = {
         'year': current_time.year,
         'month': calendar.month_abbr[current_time.month],
         'day': current_time.day,
@@ -14,11 +14,11 @@ class DeveloperMode:
         'second': current_time.second
     }
 
-    def __init__(self, version, system):
-        self.version = version
-        self.system = system
+    def __init__(self, app_version, operating_system):
+        self.app_version = app_version
+        self.operating_system = operating_system
         self.prompt = None
 
-        print(f"ToolHub {self.version} ({self.special_time['month']} {self.special_time['day']} {self.special_time['year']}, {self.special_time['hour']}:{self.special_time['minute']}:{self.special_time['second']}) [Developer Mode] on {self.system}")
+        print(f"ToolHub {self.app_version} ({self.formatted_time['month']} {self.formatted_time['day']} {self.formatted_time['year']}, {self.formatted_time['hour']}:{self.formatted_time['minute']}:{self.formatted_time['second']}) [Developer Mode] on {self.operating_system}")
         print('Type "help", "about", "credits" or "license" for more information.')
-        CommandManagements(self.version)
+        CommandManagements(self.app_version)

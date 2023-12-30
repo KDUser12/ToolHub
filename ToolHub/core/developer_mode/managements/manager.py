@@ -1,3 +1,5 @@
+package_optional_value = ["-c"]
+
 commands = [
     {
         "basic.commands": {
@@ -6,6 +8,9 @@ commands = [
             "credits",
             "license",
             "exit"
+        },
+        "base.commands": {
+            "package"
         }
     }
 ]

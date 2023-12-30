@@ -7,7 +7,7 @@ import datetime
 # Private, stable API for detecting the Python implementation.
 PYPY = sys.implementation.name == "pypy"
 
-# Private and stable API to detect Python version. PYXY means "Python X.Y". For third-party applications to use these
+# Private and stable API to detect Python tool_version. PYXY means "Python X.Y". For third-party applications to use these
 # values, each constant must remain supported by ToolHub versions
 PY36 = sys.version_info >= (3, 6)
 PY37 = sys.version_info >= (3, 7)
@@ -19,10 +19,10 @@ PY312 = sys.version_info >= (3, 12)
 
 
 def get_version(version=None):
-    """Return a PEP 440-compliant version number from VERSION."""
+    """Return a PEP 440-compliant tool_version number from VERSION."""
     version = get_complete_version(version)
 
-    # Now build the two parts of the version number:
+    # Now build the two parts of the tool_version number:
     # main = X.Y[.Z]
     # sub = .devN - for pre-alpha releases
     #   | {a|b|rc}N - for alpha, beta and rc releases
@@ -43,14 +43,14 @@ def get_version(version=None):
 
 
 def get_main_version(version=None):
-    """Return main version (X.Y[.Z]) from VERSION."""
+    """Return main tool_version (X.Y[.Z]) from VERSION."""
     version = get_complete_version(version)
     parts = 2 if version[2] == 0 else 3
     return ".".join(str(x) for x in version[:parts])
 
 
 def get_complete_version(version=None):
-    """Return a tuple of the ToolHub version. If version argument is non-empty,
+    """Return a tuple of the ToolHub tool_version. If tool_version argument is non-empty,
     check for correctness of the tuple provided.
     """
     if version is None:
@@ -69,7 +69,7 @@ def get_git_changeset():
 
     The result is the UTC timestamp of the changeset in YYYYMMDDHHMMSS format.
     This value isn't guaranteed to be unique, but collisions are very unlikely,
-    so it's sufficient for generating the development version numbers.
+    so it's sufficient for generating the development tool_version numbers.
     """
     # Repository may not be found if __file__ is undefined, e.g. in a frozen module.
     if "__file__" not in globals():
